@@ -5,7 +5,7 @@ import Sidebar from '@/components/layout/Sidebar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, User, Dog, Plus, Search, Edit, Trash2 } from 'lucide-react';
+import { Calendar, User, Dog, Plus, Search, Edit, Heart, Activity } from 'lucide-react';
 
 const TutorPets = () => {
   const [pets] = useState([
@@ -21,7 +21,8 @@ const TutorPets = () => {
       proximaVacina: '15/02/2024',
       status: 'saudavel',
       castrado: true,
-      temperamento: 'Calmo e brincalhão'
+      temperamento: 'Calmo e brincalhão',
+      cor: 'dourado'
     },
     { 
       id: 2, 
@@ -35,7 +36,8 @@ const TutorPets = () => {
       proximaVacina: '10/01/2024',
       status: 'atencao',
       castrado: true,
-      temperamento: 'Independente'
+      temperamento: 'Independente',
+      cor: 'branco'
     },
     { 
       id: 3, 
@@ -49,7 +51,8 @@ const TutorPets = () => {
       proximaVacina: '20/03/2024',
       status: 'saudavel',
       castrado: false,
-      temperamento: 'Energético'
+      temperamento: 'Energético',
+      cor: 'preto'
     },
   ]);
 
@@ -73,63 +76,93 @@ const TutorPets = () => {
       <div className="d-flex">
         <Sidebar items={sidebarItems} userType="tutor" />
         
-        <main className="flex-fill p-4">
+        <main className="flex-fill p-4 fade-in">
           <div className="container-fluid">
-            <div className="d-flex justify-content-between align-items-center mb-4">
+            <div className="d-flex justify-content-between align-items-center mb-5">
               <div>
-                <h1 className="h2 fw-bold text-dark mb-1">Meus Pets</h1>
-                <p className="text-muted">Gerencie as informações dos seus companheiros</p>
+                <h1 className="h2 fw-bold text-dark mb-2">Meus Companheiros</h1>
+                <p className="text-muted mb-0">Gerencie as informações e cuidados dos seus pets</p>
               </div>
-              <Button className="bg-pata-turquesa border-0">
+              <Button className="bg-pata-turquesa border-0 shadow-sm">
                 <Plus className="w-4 h-4 me-2" />
                 Cadastrar Novo Pet
               </Button>
             </div>
 
-            <div className="row">
+            <div className="row g-4">
               {pets.map((pet) => (
-                <div key={pet.id} className="col-md-6 col-lg-4 mb-4">
-                  <Card className="h-100 hover-scale">
-                    <CardHeader className="text-center pb-2">
-                      <div className="mb-3" style={{ fontSize: '4rem' }}>{pet.foto}</div>
-                      <CardTitle className="h5 mb-1">{pet.nome}</CardTitle>
-                      <p className="text-muted small">{pet.especie} • {pet.raca}</p>
+                <div key={pet.id} className="col-lg-4 col-md-6">
+                  <Card className="pata-card hover-scale h-100">
+                    <CardHeader className="text-center pb-3">
+                      <div className="mb-3">
+                        <div className="pet-emoji">{pet.foto}</div>
+                      </div>
+                      <CardTitle className="h4 mb-2 text-dark">{pet.nome}</CardTitle>
+                      <div className="d-flex justify-content-center gap-2 flex-wrap">
+                        <Badge variant="outline" className="border-pata-turquesa text-pata-turquesa">
+                          {pet.especie}
+                        </Badge>
+                        <Badge variant="outline" className="border-muted text-muted">
+                          {pet.raca}
+                        </Badge>
+                      </div>
                     </CardHeader>
-                    <CardContent>
-                      <div className="row g-3 mb-3">
+                    <CardContent className="pt-0">
+                      <div className="row g-3 mb-4">
                         <div className="col-6">
-                          <p className="text-muted small mb-1">Idade:</p>
-                          <p className="fw-medium small">{pet.idade}</p>
+                          <div className="bg-light rounded-3 p-3 text-center">
+                            <p className="text-muted small mb-1 fw-medium">Idade</p>
+                            <p className="fw-semibold mb-0 text-dark">{pet.idade}</p>
+                          </div>
                         </div>
                         <div className="col-6">
-                          <p className="text-muted small mb-1">Peso:</p>
-                          <p className="fw-medium small">{pet.peso}</p>
+                          <div className="bg-light rounded-3 p-3 text-center">
+                            <p className="text-muted small mb-1 fw-medium">Peso</p>
+                            <p className="fw-semibold mb-0 text-dark">{pet.peso}</p>
+                          </div>
                         </div>
                         <div className="col-6">
-                          <p className="text-muted small mb-1">Castrado:</p>
-                          <p className="fw-medium small">{pet.castrado ? 'Sim' : 'Não'}</p>
+                          <div className="bg-light rounded-3 p-3 text-center">
+                            <p className="text-muted small mb-1 fw-medium">Castrado</p>
+                            <p className="fw-semibold mb-0 text-dark">{pet.castrado ? 'Sim' : 'Não'}</p>
+                          </div>
                         </div>
                         <div className="col-6">
-                          <p className="text-muted small mb-1">Temperamento:</p>
-                          <p className="fw-medium small">{pet.temperamento}</p>
+                          <div className="bg-light rounded-3 p-3 text-center">
+                            <p className="text-muted small mb-1 fw-medium">Cor</p>
+                            <p className="fw-semibold mb-0 text-dark text-capitalize">{pet.cor}</p>
+                          </div>
                         </div>
                       </div>
                       
-                      <div className="mb-3">
+                      <div className="mb-4">
+                        <div className="d-flex align-items-center mb-2">
+                          <Activity className="w-4 h-4 text-pata-turquesa me-2" />
+                          <span className="small fw-medium text-muted">Status de Saúde</span>
+                        </div>
                         <Badge 
                           variant={pet.status === 'saudavel' ? 'default' : 'destructive'}
-                          className={pet.status === 'saudavel' ? 'bg-success' : ''}
+                          className={pet.status === 'saudavel' ? 'bg-success' : 'bg-warning text-dark'}
                         >
                           {pet.saude}
                         </Badge>
                         <p className="small text-muted mt-2 mb-0">
+                          <Calendar className="w-3 h-3 me-1 d-inline" />
                           Próxima vacina: {pet.proximaVacina}
                         </p>
+                      </div>
+
+                      <div className="mb-4">
+                        <div className="d-flex align-items-center mb-2">
+                          <Heart className="w-4 h-4 text-pata-vermelho me-2" />
+                          <span className="small fw-medium text-muted">Temperamento</span>
+                        </div>
+                        <p className="small text-dark mb-0">{pet.temperamento}</p>
                       </div>
                       
                       <div className="d-flex gap-2">
                         <Button size="sm" variant="outline" className="flex-fill">
-                          <Edit className="w-3 h-3 me-1" />
+                          <Edit className="w-3 h-3 me-2" />
                           Editar
                         </Button>
                         <Button size="sm" className="flex-fill bg-pata-turquesa border-0">
@@ -140,6 +173,17 @@ const TutorPets = () => {
                   </Card>
                 </div>
               ))}
+            </div>
+
+            <div className="row mt-5">
+              <div className="col-12">
+                <div className="text-center">
+                  <p className="text-muted">
+                    <Dog className="w-4 h-4 me-2 d-inline" />
+                    {pets.length} pets cadastrados
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </main>
