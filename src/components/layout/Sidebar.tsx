@@ -1,16 +1,6 @@
 
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { cn } from '@/lib/utils';
-import { 
-  Calendar, 
-  User, 
-  FileText, 
-  Plus,
-  Search,
-  Dog,
-  Mail
-} from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 interface SidebarItem {
   label: string;
@@ -23,30 +13,33 @@ interface SidebarProps {
   userType: string;
 }
 
-const Sidebar = ({ items, userType }: SidebarProps) => {
+const Sidebar: React.FC<SidebarProps> = ({ items, userType }) => {
+  const location = useLocation();
+
   return (
-    <aside className="w-64 bg-white border-r border-gray-200 min-h-screen">
-      <div className="p-6">
-        <div className="space-y-2">
-          {items.map((item, index) => (
-            <NavLink
-              key={index}
-              to={item.href}
-              className={({ isActive }) =>
-                cn(
-                  "flex items-center space-x-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors",
-                  isActive
-                    ? "bg-turquesa text-white"
-                    : "text-gray-700 hover:bg-gray-100"
-                )
-              }
-            >
-              {item.icon}
-              <span>{item.label}</span>
-            </NavLink>
-          ))}
+    <aside className="pata-sidebar">
+      <nav className="py-4">
+        <div className="px-3 mb-4">
+          <h6 className="text-muted text-uppercase fw-bold small">Menu {userType}</h6>
         </div>
-      </div>
+        
+        <ul className="list-unstyled">
+          {items.map((item, index) => {
+            const isActive = location.pathname === item.href;
+            return (
+              <li key={index}>
+                <a 
+                  href={item.href}
+                  className={`pata-sidebar-item ${isActive ? 'active' : ''}`}
+                >
+                  <span className="me-3">{item.icon}</span>
+                  <span>{item.label}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
     </aside>
   );
 };

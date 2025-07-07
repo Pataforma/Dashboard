@@ -51,73 +51,75 @@ const TutorConsultas = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-vh-100 bg-gray-50">
       <Header 
         userType="tutor" 
         userName="Maria Silva" 
         alerts={2}
       />
       
-      <div className="flex">
+      <div className="d-flex">
         <Sidebar items={sidebarItems} userType="tutor" />
         
-        <main className="flex-1 p-6">
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
+        <main className="flex-fill p-4">
+          <div className="container-fluid">
+            <div className="d-flex justify-content-between align-items-center mb-4">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Consultas</h1>
-                <p className="text-gray-600">Acompanhe o histórico médico dos seus pets</p>
+                <h1 className="h2 fw-bold text-dark mb-1">Consultas</h1>
+                <p className="text-muted">Acompanhe o histórico médico dos seus pets</p>
               </div>
-              <Button className="bg-turquesa hover:bg-turquesa/90">
-                <Calendar className="w-4 h-4 mr-2" />
+              <Button className="bg-pata-turquesa border-0">
+                <Calendar className="w-4 h-4 me-2" />
                 Agendar Consulta
               </Button>
             </div>
 
-            <div className="space-y-4">
-              {consultas.map((consulta) => (
-                <Card key={consulta.id} className="hover:shadow-md transition-shadow">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <div className="text-2xl">🐕</div>
-                        <div>
-                          <h3 className="font-semibold text-lg">{consulta.pet}</h3>
-                          <p className="text-gray-600">{consulta.tipo}</p>
-                          <p className="text-sm text-gray-500">Dr. {consulta.veterinario}</p>
+            <div className="row">
+              <div className="col-12">
+                {consultas.map((consulta) => (
+                  <Card key={consulta.id} className="mb-3 hover-scale">
+                    <CardContent className="p-4">
+                      <div className="d-flex justify-content-between align-items-center">
+                        <div className="d-flex align-items-center">
+                          <div className="me-3" style={{ fontSize: '2rem' }}>🐕</div>
+                          <div>
+                            <h3 className="h5 fw-semibold mb-1">{consulta.pet}</h3>
+                            <p className="text-muted mb-1">{consulta.tipo}</p>
+                            <p className="small text-muted mb-0">Dr. {consulta.veterinario}</p>
+                          </div>
+                        </div>
+                        
+                        <div className="text-end">
+                          <div className="d-flex align-items-center mb-1">
+                            <Calendar className="w-4 h-4 text-pata-turquesa me-2" />
+                            <span className="fw-medium">{consulta.data}</span>
+                          </div>
+                          <div className="d-flex align-items-center mb-1">
+                            <Clock className="w-4 h-4 text-pata-turquesa me-2" />
+                            <span>{consulta.hora}</span>
+                          </div>
+                          <div className="d-flex align-items-center">
+                            <MapPin className="w-4 h-4 text-pata-turquesa me-2" />
+                            <span className="small text-muted">{consulta.endereco}</span>
+                          </div>
+                        </div>
+                        
+                        <div className="d-flex flex-column align-items-end">
+                          <Badge 
+                            variant={consulta.status === 'agendada' ? 'default' : 'secondary'}
+                            className={`mb-2 ${consulta.status === 'agendada' ? 'badge-pata-turquesa' : 'bg-success'}`}
+                          >
+                            {consulta.status === 'agendada' ? 'Agendada' : 'Concluída'}
+                          </Badge>
+                          <Button size="sm" variant="outline">
+                            Ver Detalhes
+                          </Button>
                         </div>
                       </div>
-                      
-                      <div className="text-right space-y-2">
-                        <div className="flex items-center space-x-2">
-                          <Calendar className="w-4 h-4 text-turquesa" />
-                          <span className="font-medium">{consulta.data}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <Clock className="w-4 h-4 text-turquesa" />
-                          <span>{consulta.hora}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <MapPin className="w-4 h-4 text-turquesa" />
-                          <span className="text-sm text-gray-500">{consulta.endereco}</span>
-                        </div>
-                      </div>
-                      
-                      <div className="flex flex-col items-end space-y-2">
-                        <Badge 
-                          variant={consulta.status === 'agendada' ? 'default' : 'secondary'}
-                          className={consulta.status === 'agendada' ? 'bg-turquesa' : 'bg-green-100 text-green-800'}
-                        >
-                          {consulta.status === 'agendada' ? 'Agendada' : 'Concluída'}
-                        </Badge>
-                        <Button size="sm" variant="outline">
-                          Ver Detalhes
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
           </div>
         </main>

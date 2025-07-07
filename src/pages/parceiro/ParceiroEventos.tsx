@@ -15,20 +15,24 @@ const ParceiroEventos = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-vh-100 bg-gray-50">
       <Header 
         userType="parceiro" 
         userName="ONG Patinhas" 
         alerts={5}
       />
       
-      <div className="flex">
+      <div className="d-flex">
         <Sidebar items={sidebarItems} userType="parceiro" />
         
-        <main className="flex-1 p-6">
-          <div className="space-y-6">
-            <h1 className="text-2xl font-bold text-gray-900">Eventos e Feiras</h1>
-            <p className="text-gray-600">Em desenvolvimento...</p>
+        <main className="flex-fill p-4">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-12">
+                <h1 className="h2 fw-bold text-dark mb-3">Eventos e Feiras</h1>
+                <p className="text-muted">Em desenvolvimento...</p>
+              </div>
+            </div>
           </div>
         </main>
       </div>

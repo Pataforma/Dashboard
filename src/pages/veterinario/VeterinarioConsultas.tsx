@@ -41,69 +41,71 @@ const VeterinarioConsultas = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-vh-100 bg-gray-50">
       <Header 
         userType="veterinario" 
         userName="Dr. João Silva" 
         alerts={3}
       />
       
-      <div className="flex">
+      <div className="d-flex">
         <Sidebar items={sidebarItems} userType="veterinario" />
         
-        <main className="flex-1 p-6">
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
+        <main className="flex-fill p-4">
+          <div className="container-fluid">
+            <div className="d-flex justify-content-between align-items-center mb-4">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Consultas</h1>
-                <p className="text-gray-600">Gerencie sua agenda de atendimentos</p>
+                <h1 className="h2 fw-bold text-dark mb-1">Consultas</h1>
+                <p className="text-muted">Gerencie sua agenda de atendimentos</p>
               </div>
-              <Button className="bg-turquesa hover:bg-turquesa/90">
-                <Plus className="w-4 h-4 mr-2" />
+              <Button className="bg-pata-turquesa border-0">
+                <Plus className="w-4 h-4 me-2" />
                 Nova Consulta
               </Button>
             </div>
 
-            <div className="space-y-4">
-              {consultas.map((consulta) => (
-                <Card key={consulta.id} className="hover:shadow-md transition-shadow">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <div className="text-3xl">🐕</div>
-                        <div>
-                          <h3 className="font-semibold text-lg">{consulta.paciente}</h3>
-                          <p className="text-gray-600">{consulta.tipo}</p>
-                          <p className="text-sm text-gray-500">Tutor: {consulta.tutor}</p>
+            <div className="row">
+              <div className="col-12">
+                {consultas.map((consulta) => (
+                  <Card key={consulta.id} className="mb-3 hover-scale">
+                    <CardContent className="p-4">
+                      <div className="d-flex justify-content-between align-items-center">
+                        <div className="d-flex align-items-center">
+                          <div className="me-3" style={{ fontSize: '3rem' }}>🐕</div>
+                          <div>
+                            <h3 className="h5 fw-semibold mb-1">{consulta.paciente}</h3>
+                            <p className="text-muted mb-1">{consulta.tipo}</p>
+                            <p className="small text-muted mb-0">Tutor: {consulta.tutor}</p>
+                          </div>
+                        </div>
+                        
+                        <div className="text-center">
+                          <div className="d-flex align-items-center mb-1">
+                            <Calendar className="w-4 h-4 text-pata-turquesa me-2" />
+                            <span className="fw-medium">{consulta.data}</span>
+                          </div>
+                          <div className="d-flex align-items-center">
+                            <Clock className="w-4 h-4 text-pata-turquesa me-2" />
+                            <span>{consulta.hora}</span>
+                          </div>
+                        </div>
+                        
+                        <div className="d-flex flex-column align-items-end">
+                          <Badge 
+                            variant={consulta.status === 'agendada' ? 'default' : 'secondary'}
+                            className={`mb-2 ${consulta.status === 'em_andamento' ? 'badge-pata-amarelo' : 'badge-pata-turquesa'}`}
+                          >
+                            {consulta.status === 'agendada' ? 'Agendada' : 'Em Andamento'}
+                          </Badge>
+                          <Button size="sm" className="bg-pata-turquesa border-0">
+                            Iniciar Consulta
+                          </Button>
                         </div>
                       </div>
-                      
-                      <div className="text-center">
-                        <div className="flex items-center space-x-2">
-                          <Calendar className="w-4 h-4 text-turquesa" />
-                          <span className="font-medium">{consulta.data}</span>
-                        </div>
-                        <div className="flex items-center space-x-2 mt-1">
-                          <Clock className="w-4 h-4 text-turquesa" />
-                          <span>{consulta.hora}</span>
-                        </div>
-                      </div>
-                      
-                      <div className="flex flex-col items-end space-y-2">
-                        <Badge 
-                          variant={consulta.status === 'agendada' ? 'default' : 'secondary'}
-                          className={consulta.status === 'em_andamento' ? 'bg-amarelo-dourado text-white' : 'bg-turquesa'}
-                        >
-                          {consulta.status === 'agendada' ? 'Agendada' : 'Em Andamento'}
-                        </Badge>
-                        <Button size="sm" className="bg-turquesa hover:bg-turquesa/90">
-                          Iniciar Consulta
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
           </div>
         </main>

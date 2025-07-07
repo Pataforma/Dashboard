@@ -1,65 +1,47 @@
 
 import React from 'react';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
+import { Bell, User } from 'lucide-react';
 
 interface HeaderProps {
-  userType: 'veterinario' | 'tutor' | 'parceiro' | 'anunciante';
+  userType: string;
   userName: string;
-  userImage?: string;
   alerts?: number;
 }
 
-const Header = ({ userType, userName, userImage, alerts = 0 }: HeaderProps) => {
-  const getUserTypeLabel = () => {
-    switch (userType) {
-      case 'veterinario': return 'Veterinário';
-      case 'tutor': return 'Tutor';
-      case 'parceiro': return 'Parceiro';
-      case 'anunciante': return 'Anunciante';
-      default: return '';
-    }
-  };
-
+const Header: React.FC<HeaderProps> = ({ userType, userName, alerts = 0 }) => {
   return (
-    <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-      <div className="flex items-center space-x-4">
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-turquesa rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-sm">🐾</span>
+    <header className="pata-header">
+      <div className="d-flex justify-content-between align-items-center">
+        <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center justify-content-center bg-pata-turquesa text-white rounded me-3" 
+               style={{ width: '2rem', height: '2rem' }}>
+            <span className="fw-bold">🐾</span>
           </div>
-          <h1 className="text-xl font-bold text-gray-900">Pataforma</h1>
-        </div>
-      </div>
-      
-      <div className="flex items-center space-x-4">
-        {alerts > 0 && (
-          <Badge variant="destructive" className="bg-vermelho-alaranjado">
-            {alerts} alertas
-          </Badge>
-        )}
-        
-        <div className="flex items-center space-x-3">
-          <div className="text-right">
-            <p className="text-sm font-medium text-gray-900">{userName}</p>
-            <p className="text-xs text-gray-500">{getUserTypeLabel()}</p>
-          </div>
-          <Avatar>
-            <AvatarImage src={userImage} alt={userName} />
-            <AvatarFallback className="bg-turquesa text-white">
-              {userName.charAt(0).toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
+          <h4 className="mb-0 fw-bold text-pata-turquesa">Pataforma</h4>
         </div>
         
-        <Button 
-          variant="outline" 
-          size="sm"
-          className="text-turquesa border-turquesa hover:bg-turquesa hover:text-white"
-        >
-          Copiar Link Público
-        </Button>
+        <div className="d-flex align-items-center">
+          <div className="position-relative me-3">
+            <Bell className="text-muted" size={20} />
+            {alerts > 0 && (
+              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" 
+                    style={{ fontSize: '0.7rem' }}>
+                {alerts}
+              </span>
+            )}
+          </div>
+          
+          <div className="d-flex align-items-center">
+            <div className="d-flex align-items-center justify-content-center bg-secondary text-white rounded-circle me-2"
+                 style={{ width: '2rem', height: '2rem' }}>
+              <User size={16} />
+            </div>
+            <div>
+              <div className="fw-medium">{userName}</div>
+              <small className="text-muted text-capitalize">{userType}</small>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
   );

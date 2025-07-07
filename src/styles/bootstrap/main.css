@@ -1,0 +1,151 @@
+
+/* Bootstrap CSS with custom Pataforma theme */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* Custom CSS variables for Pataforma colors */
+:root {
+  --pata-turquesa: #0DB2AC;
+  --pata-vermelho: #FC694D;
+  --pata-amarelo: #FABA32;
+  --pata-gray-50: #f9fafb;
+  --pata-gray-100: #f3f4f6;
+  --pata-gray-200: #e5e7eb;
+  --pata-gray-300: #d1d5db;
+  --pata-gray-500: #6b7280;
+  --pata-gray-600: #4b5563;
+  --pata-gray-700: #374151;
+  --pata-gray-800: #1f2937;
+  --pata-gray-900: #111827;
+}
+
+/* Override Bootstrap primary colors with Pataforma theme */
+.btn-primary {
+  background-color: var(--pata-turquesa);
+  border-color: var(--pata-turquesa);
+}
+
+.btn-primary:hover {
+  background-color: #0a9e98;
+  border-color: #0a9e98;
+}
+
+.btn-secondary {
+  background-color: var(--pata-vermelho);
+  border-color: var(--pata-vermelho);
+}
+
+.btn-secondary:hover {
+  background-color: #e55e47;
+  border-color: #e55e47;
+}
+
+.btn-warning {
+  background-color: var(--pata-amarelo);
+  border-color: var(--pata-amarelo);
+  color: #000;
+}
+
+.btn-warning:hover {
+  background-color: #e6a62d;
+  border-color: #e6a62d;
+  color: #000;
+}
+
+/* Custom utility classes */
+.bg-pata-turquesa { background-color: var(--pata-turquesa) !important; }
+.bg-pata-vermelho { background-color: var(--pata-vermelho) !important; }
+.bg-pata-amarelo { background-color: var(--pata-amarelo) !important; }
+.text-pata-turquesa { color: var(--pata-turquesa) !important; }
+.text-pata-vermelho { color: var(--pata-vermelho) !important; }
+.text-pata-amarelo { color: var(--pata-amarelo) !important; }
+
+.min-vh-100 { min-height: 100vh; }
+.bg-gray-50 { background-color: var(--pata-gray-50); }
+
+/* Custom card styles */
+.pata-card {
+  border: none;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+.pata-card:hover {
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+/* Sidebar styles */
+.pata-sidebar {
+  width: 256px;
+  background-color: white;
+  border-right: 1px solid var(--pata-gray-200);
+  min-height: 100vh;
+}
+
+.pata-sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: var(--pata-gray-700);
+  text-decoration: none;
+  border-radius: 0.375rem;
+  margin: 0.25rem 0.5rem;
+  transition: all 0.15s ease-in-out;
+}
+
+.pata-sidebar-item:hover {
+  background-color: var(--pata-gray-100);
+  color: var(--pata-gray-700);
+  text-decoration: none;
+}
+
+.pata-sidebar-item.active {
+  background-color: var(--pata-turquesa);
+  color: white;
+}
+
+/* Header styles */
+.pata-header {
+  background-color: white;
+  border-bottom: 1px solid var(--pata-gray-200);
+  padding: 1rem 1.5rem;
+}
+
+/* Badge styles */
+.badge-pata-turquesa {
+  background-color: var(--pata-turquesa);
+  color: white;
+}
+
+.badge-pata-vermelho {
+  background-color: var(--pata-vermelho);
+  color: white;
+}
+
+.badge-pata-amarelo {
+  background-color: var(--pata-amarelo);
+  color: #000;
+}
+
+/* Animation utilities */
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hover-scale {
+  transition: transform 0.2s;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
